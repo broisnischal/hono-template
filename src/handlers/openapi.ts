@@ -1,14 +1,14 @@
 import { Scalar } from "@scalar/hono-api-reference";
 import type { OpenAPIHono } from "@hono/zod-openapi";
-import type { AppContext } from "../types";
+import type { AppVariables } from "../types";
 
-export function setupOpenAPI(app: OpenAPIHono<{ Bindings: AppContext }>) {
+export function setupOpenAPI(app: OpenAPIHono<{ Variables: AppVariables }>) {
   app.doc("/doc", {
     openapi: "3.0.0",
     info: {
       version: "1.0.0",
-      title: "Internal Payment Intent",
-      description: "Payment API",
+      title: "Payment service (Stripe)",
+      description: "Internal payment APIs and Stripe webhooks",
     },
     servers: [{ url: "http://localhost:3000", description: "Local Server" }],
   });
@@ -17,7 +17,7 @@ export function setupOpenAPI(app: OpenAPIHono<{ Bindings: AppContext }>) {
     "/docs",
     Scalar({
       url: "/doc",
-      pageTitle: "Internal Payment Intent",
+      pageTitle: "Payment service",
       theme: "kepler",
       layout: "modern",
       defaultHttpClient: {

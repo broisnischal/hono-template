@@ -1,5 +1,8 @@
-import { DB } from "./lib/db";
+import type { DB } from "./lib/db";
 
-export interface AppContext {
+/** Hono context variables (request-scoped). */
+export type AppVariables = {
   db: DB;
-}
+  /** Set by {@link requestId} middleware when present. */
+  requestId?: string;
+};

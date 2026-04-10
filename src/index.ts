@@ -1,11 +1,8 @@
 import "./env";
 import app from "./app";
-import { db } from "./lib/db";
+import { env } from "./env";
 
 export default {
-  port: 3000,
+  port: env.PORT,
   fetch: app.fetch,
-  bindings: {
-    db,
-  },
 };
