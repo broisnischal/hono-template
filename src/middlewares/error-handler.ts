@@ -9,11 +9,15 @@ import type { AppVariables } from "../types";
 
 const isProd = process.env.NODE_ENV === "production";
 
-function requestIdFrom(c: Context<{ Variables: AppVariables }>): string | undefined {
+function requestIdFrom(
+  c: Context<{ Variables: AppVariables }>,
+): string | undefined {
   return c.get("requestId");
 }
 
-function formatZodIssues(error: ZodError): { issues: { path: (string | number)[]; message: string }[] } {
+function formatZodIssues(error: ZodError): {
+  issues: { path: (string | number)[]; message: string }[];
+} {
   return {
     issues: error.issues.map((i) => ({
       path: i.path,
@@ -23,7 +27,11 @@ function formatZodIssues(error: ZodError): { issues: { path: (string | number)[]
 }
 
 function stripeHttpStatus(err: Stripe.errors.StripeError): number {
-  if (typeof err.statusCode === "number" && err.statusCode >= 400 && err.statusCode <= 599) {
+  if (
+    typeof err.statusCode === "number" &&
+    err.statusCode >= 400 &&
+    err.statusCode <= 599
+  ) {
     return err.statusCode;
   }
   if (err instanceof Stripe.errors.StripeConnectionError) {
@@ -54,7 +62,10 @@ export const validationDefaultHook: Hook<
   }
 };
 
-export const apiErrorHandler: ErrorHandler<{ Variables: AppVariables }> = (err, c) => {
+export const apiErrorHandler: ErrorHandler<{ Variables: AppVariables }> = (
+  err,
+  c,
+) => {
   const requestId = requestIdFrom(c);
 
   if (err instanceof HTTPException) {
@@ -108,7 +119,11 @@ export const apiErrorHandler: ErrorHandler<{ Variables: AppVariables }> = (err, 
   }
 
   const message =
-    err instanceof Error ? (isProd ? "Internal server error" : err.message) : "Internal server error";
+    err instanceof Error
+      ? isProd
+        ? "Internal server error"
+        : err.message
+      : "Internal server error";
 
   console.error("[api-error]", requestId ?? "no-request-id", err);
 
@@ -122,7 +137,9 @@ export const apiErrorHandler: ErrorHandler<{ Variables: AppVariables }> = (err, 
   return c.json(body, 500);
 };
 
-export const apiNotFoundHandler: NotFoundHandler<{ Variables: AppVariables }> = (c) => {
+export const apiNotFoundHandler: NotFoundHandler<{
+  Variables: AppVariables;
+}> = (c) => {
   const body: ApiErrorBody = {
     error: {
       code: "not_found",

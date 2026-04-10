@@ -1,2 +1,5 @@
 # deps
 node_modules/
+
+# Vite build output for /test/pay (run `bun run client:build`)
+static/test-pay/

@@ -2,6 +2,8 @@
   "name": "payment",
   "scripts": {
     "dev": "bun run --hot src/index.ts",
+    "client:build": "vite build --config client/test-pay/vite.config.ts",
+    "client:dev": "vite --config client/test-pay/vite.config.ts",
     "start": "bun src/index.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
@@ -10,15 +12,23 @@
   "dependencies": {
     "@hono/zod-openapi": "^1.2.4",
     "@scalar/hono-api-reference": "^0.10.7",
+    "@stripe/react-stripe-js": "^6.1.0",
+    "@stripe/stripe-js": "^9.1.0",
     "@types/pg": "^8.20.0",
     "drizzle-orm": "^0.45.2",
     "hono": "^4.12.12",
     "pg": "^8.20.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
     "stripe": "^22.0.1",
     "zod": "^4.3.6"
   },
   "devDependencies": {
     "@types/bun": "latest",
-    "drizzle-kit": "^0.31.10"
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "drizzle-kit": "^0.31.10",
+    "vite": "^8.0.8"
   }
 }

@@ -8,6 +8,7 @@ services:
       DATABASE_URL: postgresql://postgres:postgres@timeseriesdb:5432/payment
       REDIS_URL: redis://redis:6379
       STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+      STRIPE_PUBLISHABLE_KEY: ${STRIPE_PUBLISHABLE_KEY}
       STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
       INTERNAL_API_TOKEN: ${INTERNAL_API_TOKEN}
     depends_on:
