@@ -1,0 +1,12 @@
+.git
+.gitignore
+.cursor
+node_modules
+dist
+coverage
+.env
+README.md
+compose.yaml
+caddy/
+drizzle/
+*.log

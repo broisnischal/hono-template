@@ -7,7 +7,7 @@ export function setupOpenAPI(app: OpenAPIHono<{ Bindings: AppContext }>) {
     openapi: "3.0.0",
     info: {
       version: "1.0.0",
-      title: "Hono API",
+      title: "Internal Payment Intent",
       description: "Payment API",
     },
     servers: [{ url: "http://localhost:3000", description: "Local Server" }],
@@ -17,7 +17,13 @@ export function setupOpenAPI(app: OpenAPIHono<{ Bindings: AppContext }>) {
     "/docs",
     Scalar({
       url: "/doc",
-      pageTitle: "Hono API",
+      pageTitle: "Internal Payment Intent",
+      theme: "kepler",
+      layout: "modern",
+      defaultHttpClient: {
+        targetKey: "js",
+        clientKey: "axios",
+      },
     }),
   );
 }
